@@ -39,7 +39,7 @@ object TrustedHandler {
             val flaggedMods = TrustedValidator.flagMods(modList, handler.connectionInfo.substringBefore(" "))
 
             if(flaggedMods.isNotEmpty()) {
-                handler.disconnect(TrustedConstants.buildRejectedMessage(flaggedMods))
+                handler.disconnect(TrustedConstants.composeRejectedMessage(flaggedMods))
                 return@registerGlobalReceiver
             }
         }
