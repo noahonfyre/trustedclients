@@ -1,44 +1,35 @@
 {
 	"schemaVersion": 1,
-	"id": "relayanticheat",
+	"id": "trustedclients",
 	"version": "${version}",
-	"name": "relayanticheat",
-	"description": "This is an example description! Tell everyone what your mod is about!",
-	"authors": [
-		"Me!"
-	],
+	"name": "Trusted Clients",
+	"description": "A lightweight anti-cheat/client-scanning mod which shows client installed content on the server when a player joins.",
+	"authors": ["NoahOnFyre"],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
+		"homepage": "https://modrinth.com/mod/trustedclients",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
-	"icon": "assets/relayanticheat/icon.png",
+	"license": "MIT",
+	"icon": "assets/trustedclients/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			{
-				"value": "com.nyronium.Relayanticheat",
+				"value": "com.nyronium.TrustedClients",
 				"adapter": "kotlin"
 			}
 		],
 		"client": [
 			{
-				"value": "com.nyronium.client.RelayanticheatClient",
+				"value": "com.nyronium.client.TrustedClientside",
 				"adapter": "kotlin"
 			}
 		]
 	},
-	"mixins": [
-		"relayanticheat.mixins.json",
-		{
-			"config": "relayanticheat.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
-		"minecraft": "~1.21.11",
-		"java": ">=21",
+		"minecraft": "~1.21.10",
+		"java": ">=17",
 		"fabric-api": "*",
 		"fabric-language-kotlin": "*"
 	}
