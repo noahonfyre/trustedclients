@@ -3,7 +3,7 @@
 	"id": "trustedclients",
 	"version": "${version}",
 	"name": "Trusted Clients",
-	"description": "A lightweight anti-cheat/client-scanning mod which shows client installed content on the server when a player joins.",
+	"description": "A lightweight anti-cheat/client-scanning mod which shows client installed mods on the server when a player joins.",
 	"authors": ["NoahOnFyre"],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/trustedclients",
