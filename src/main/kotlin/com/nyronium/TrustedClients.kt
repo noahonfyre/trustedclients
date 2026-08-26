@@ -18,5 +18,6 @@ object TrustedClients : ModInitializer {
 	override fun onInitialize() {
         TrustedHandler.initialize()
         TrustedConfigHandler.initialize()
+        TrustedCommands.initialize()
 	}
 }
