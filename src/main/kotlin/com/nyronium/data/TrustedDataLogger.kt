@@ -6,6 +6,7 @@ import kotlin.collections.joinToString
 object TrustedDataLogger {
     fun logMods(mods: List<ModListEntry>, logger: Logger) {
         logger.info("Client has ${mods.size} mods installed.")
+        if(mods.isEmpty()) return
         logger.info(mods.joinToString { entry -> "${entry.name} (ID: ${entry.id})" })
     }
 }
