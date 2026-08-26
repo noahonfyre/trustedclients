@@ -5,7 +5,7 @@ import com.nyronium.data.ModListEntry
 import com.nyronium.data.TrustedDataLogger.logMods
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.networking.v1.ClientLoginNetworking
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.FriendlyByteBufs
 import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -25,7 +25,7 @@ object TrustedClientside : ClientModInitializer {
 
             CLIENT_LOGGER.info("Exchanging with server...")
 
-            val response = PacketByteBufs.create()
+            val response = FriendlyByteBufs.create()
 
             response.writeInt(TrustedClients.PROTOCOL_VERSION)
             response.writeCollection(initialMods, ModListEntry::write)

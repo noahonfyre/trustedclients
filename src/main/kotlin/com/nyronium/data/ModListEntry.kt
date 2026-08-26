@@ -1,20 +1,20 @@
 package com.nyronium.data
 
-import net.minecraft.network.PacketByteBuf
+import net.minecraft.network.FriendlyByteBuf
 
 data class ModListEntry(
     val id: String,
     val name: String,
 ) {
     companion object {
-        fun write(buf: PacketByteBuf, data: ModListEntry) {
-            buf.writeString(data.id)
-            buf.writeString(data.name)
+        fun write(buf: FriendlyByteBuf, data: ModListEntry) {
+            buf.writeUtf(data.id)
+            buf.writeUtf(data.name)
         }
 
-        fun read(buf: PacketByteBuf): ModListEntry {
-            val id: String = buf.readString()
-            val name: String = buf.readString()
+        fun read(buf: FriendlyByteBuf): ModListEntry {
+            val id: String = buf.readUtf()
+            val name: String = buf.readUtf()
             return ModListEntry(id, name)
         }
     }

@@ -4,7 +4,7 @@ import com.nyronium.TrustedClients
 import com.nyronium.TrustedClients.PROTOCOL_VERSION
 import com.nyronium.data.ModListEntry
 import com.nyronium.data.TrustedDataLogger
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
+import net.fabricmc.fabric.api.networking.v1.FriendlyByteBufs
 import net.fabricmc.fabric.api.networking.v1.ServerLoginConnectionEvents
 import net.fabricmc.fabric.api.networking.v1.ServerLoginNetworking
 import net.fabricmc.loader.api.FabricLoader
@@ -12,7 +12,7 @@ import net.fabricmc.loader.api.FabricLoader
 object TrustedHandler {
     fun initialize() {
         ServerLoginConnectionEvents.QUERY_START.register { impl, server, sender, synchronizer ->
-            sender.sendPacket(TrustedClients.LOGIN_CHANNEL, PacketByteBufs.empty())
+            sender.sendPacket(TrustedClients.LOGIN_CHANNEL, FriendlyByteBufs.empty())
         }
 
         ServerLoginNetworking.registerGlobalReceiver(TrustedClients.LOGIN_CHANNEL) {
@@ -36,7 +36,7 @@ object TrustedHandler {
 
             TrustedDataLogger.logMods(modList, TrustedClients.LOGGER)
 
-            val flaggedMods = TrustedValidator.flagMods(modList, handler.connectionInfo.substringBefore(" "))
+            val flaggedMods = TrustedValidator.flagMods(modList, handler.userName)
 
             if(flaggedMods.isNotEmpty()) {
                 handler.disconnect(TrustedConstants.composeRejectedMessage(flaggedMods))
