@@ -20,6 +20,7 @@ object TrustedConfigHandler {
         .resolve("main.json")
 
     private fun load(): TrustedConfigData {
+        TrustedClients.LOGGER.info("Loading config...")
         data = try {
             if(FILE.exists()) {
                 val json = Files.readString(FILE)
@@ -37,13 +38,19 @@ object TrustedConfigHandler {
         return data
     }
 
-    fun save() {
+    private fun save() {
+        TrustedClients.LOGGER.info("Saving config...")
         try {
             Files.createDirectories(FILE.parent)
             Files.writeString(FILE, GSON.toJson(data))
         } catch (e: IOException) {
             TrustedClients.LOGGER.error("Failed to save config $FILE: ${e.message}")
         }
+    }
+
+    fun reload() {
+        TrustedClients.LOGGER.info("Reloading config...")
+        load()
     }
 
     fun update(mutator: (TrustedConfigData) -> Unit) {
@@ -54,5 +61,7 @@ object TrustedConfigHandler {
     fun initialize() {
         ServerLifecycleEvents.SERVER_STARTED.register { load() }
         ServerLifecycleEvents.SERVER_STOPPING.register { save() }
+
+        TrustedClients.LOGGER.info("Config initialized!")
     }
 }
