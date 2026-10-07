@@ -36,7 +36,7 @@ object TrustedHandler {
 
             TrustedDataLogger.logMods(modList, TrustedClients.LOGGER)
 
-            val flaggedMods = TrustedValidator.flagMods(modList, handler.userName)
+            val flaggedMods = TrustedValidator.flagMods(modList, handler.userName.substringBefore(" "))
 
             if(flaggedMods.isNotEmpty()) {
                 handler.disconnect(TrustedConstants.composeRejectedMessage(flaggedMods))
