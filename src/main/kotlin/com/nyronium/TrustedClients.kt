@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory
 
 object TrustedClients : ModInitializer {
 	const val ID: String = "trustedclients"
-    const val PROTOCOL_VERSION: Int = 1
+    const val PROTOCOL_VERSION: Int = 2
 
 	val LOGGER: Logger = LoggerFactory.getLogger(ID)
     val LOGIN_CHANNEL: Identifier = Identifier.fromNamespaceAndPath(ID, "trusted_login")
