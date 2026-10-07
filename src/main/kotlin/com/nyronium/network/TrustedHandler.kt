@@ -30,13 +30,21 @@ object TrustedHandler {
                 return@registerGlobalReceiver
             }
 
-            val modList = buf.readList(ModListEntry.Companion::read).filter { modListEntry ->
-                !FabricLoader.getInstance().isModLoaded(modListEntry.id) && !TrustedValidator.isDefaultMod(modListEntry.id)
+            val modListLength = buf.readInt()
+            val rawModList = mutableListOf<ModListEntry>()
+
+            (0 until modListLength).forEach { _ ->
+                val entry = ModListEntry.read(buf)
+                rawModList.add(entry)
+            }
+
+            val modList = rawModList.filter {
+                modListEntry -> !FabricLoader.getInstance().isModLoaded(modListEntry.id) && !TrustedValidator.isDefaultMod(modListEntry.id)
             }
 
             TrustedDataLogger.logMods(modList, TrustedClients.LOGGER)
 
-            val flaggedMods = TrustedValidator.flagMods(modList, handler.userName)
+            val flaggedMods = TrustedValidator.flagMods(modList, handler.userName.substringBefore(" "))
 
             if(flaggedMods.isNotEmpty()) {
                 handler.disconnect(TrustedConstants.composeRejectedMessage(flaggedMods))
