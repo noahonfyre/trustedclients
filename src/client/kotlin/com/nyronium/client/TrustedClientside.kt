@@ -28,7 +28,11 @@ object TrustedClientside : ClientModInitializer {
             val response = FriendlyByteBufs.create()
 
             response.writeInt(TrustedClients.PROTOCOL_VERSION)
-            response.writeCollection(initialMods, ModListEntry::write)
+            response.writeInt(initialMods.size)
+
+            for (mod in initialMods) {
+                ModListEntry.write(response, mod)
+            }
 
             return@registerGlobalReceiver CompletableFuture.completedFuture(response)
         }
